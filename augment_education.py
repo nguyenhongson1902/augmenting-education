@@ -98,9 +98,17 @@ if __name__ == '__main__':
     df2['augmented_name'] = df2['normed_text_unique'].apply(lambda x: results[x])
     df2['count'] = df2['normed_text_unique'].apply(lambda x: len(results[x]))
 
+    # Adding original data to fake data
+    for i in tqdm(range(len(df2)), desc="Adding Original to Fake"):
+        content = df2.loc[i, 'normed_text_unique']
+        original_list = df.loc[df['normed_text']==content, :]['text'].to_list()
+        df2.loc[i, 'augmented_name'].extend(original_list)
+        df2.loc[i, 'count'] += len(original_list)
+    
+    # Save df2
     df2.to_csv('D:\Projects\VND_work\classification_fb_education\data_augmented\education_train_count.csv', index=False)
 
-
+    # Flattening
     n_rows = df2['count'].sum()
     n_columns = 2
     df3 = pd.DataFrame(index=range(n_rows), columns=range(n_columns))
