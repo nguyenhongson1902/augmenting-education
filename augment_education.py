@@ -41,33 +41,99 @@ def generate_augmentation(s, num_iters=1000):
     s_no_accents = remove_accent(s).lower()
     results[s] = [s, s_no_accents]
     
-    augmentation = {'thpt': ['thpt', 'tthpt','pt', 'ptth', 'pho thong', 'trung hoc pho thong', 'truong trung hoc pho thong', 'cap 3', 'cap 3', 'pho thong trung hoc', 'truong pho thong trung hoc'],
+    augmentation = {'truong trung hoc pho thong': ['thpt', 'thptth', 'tkpt', 'tthpt','pt', 'ptth', 'pho thong', 'phổ thông', 'ph0 th0ng', 'pk0 tk0nq',
+                        'trung hoc pho thong', 'trung h0.c ph0 th0ng', 'trunq h0c pk0 tk0nq', 
+                        'trung học phổ thông' 'truong trung hoc pho thong', 'trường trung học phổ thông', 'tru0`ng trung h0.c ph0 th0ng',
+                        'tru0nq trunq h0c pk0 tk0nq', 'truog trug hoc pho thog', 'trg thpt', 'trường thpt', 'truog trug hoc fo thog',
+                        'cap 3', 'cấp 3', 'c4p 3', 'pho thong trung hoc', 'ph0 th0ng trung h0c', 'pk0 tk0nq trunq h0c',
+                        'phổ thông trung học', 'fo thog trug hoc','truong pho thong trung hoc', 
+                        'trường phổ thông trung học', 'truog fo thog trug hoc', 'tru0ng ph0 th0ng trung h0c', 'tru0nq pk0 tk0nq trunq h0c'],
+                    'trung hoc pho thong': ['thpt', 'thptth', 'tkpt', 'tthpt','pt', 'ptth', 'pho thong', 'phổ thông', 'ph0 th0ng', 'pk0 tk0nq',
+                        'trung hoc pho thong', 'trung h0.c ph0 th0ng', 'trunq h0c pk0 tk0nq', 
+                        'trung học phổ thông' 'truong trung hoc pho thong', 'trường trung học phổ thông', 'tru0`ng trung h0.c ph0 th0ng',
+                        'tru0nq trunq h0c pk0 tk0nq', 'truog trug hoc pho thog', 'trg thpt', 'trường thpt', 'truog trug hoc fo thog',
+                        'cap 3', 'cấp 3', 'c4p 3', 'pho thong trung hoc', 'ph0 th0ng trung h0c', 'pk0 tk0nq trunq h0c',
+                        'phổ thông trung học', 'fo thog trug hoc','truong pho thong trung hoc', 
+                        'trường phổ thông trung học', 'truog fo thog trug hoc', 'tru0ng ph0 th0ng trung h0c', 'tru0nq pk0 tk0nq trunq h0c'],
+                    'truong thpt': ['thpt', 'thptth', 'tkpt', 'tthpt','pt', 'ptth', 'pho thong', 'phổ thông', 'ph0 th0ng', 'pk0 tk0nq',
+                        'trung hoc pho thong', 'trung h0.c ph0 th0ng', 'trunq h0c pk0 tk0nq', 
+                        'trung học phổ thông' 'truong trung hoc pho thong', 'trường trung học phổ thông', 'tru0`ng trung h0.c ph0 th0ng',
+                        'tru0nq trunq h0c pk0 tk0nq', 'truog trug hoc pho thog', 'trg thpt', 'trường thpt', 'truog trug hoc fo thog',
+                        'cap 3', 'cấp 3', 'c4p 3', 'pho thong trung hoc', 'ph0 th0ng trung h0c', 'pk0 tk0nq trunq h0c',
+                        'phổ thông trung học', 'fo thog trug hoc','truong pho thong trung hoc', 
+                        'trường phổ thông trung học', 'truog fo thog trug hoc', 'tru0ng ph0 th0ng trung h0c', 'tru0nq pk0 tk0nq trunq h0c'],
+                    'thpt': ['thpt', 'thptth', 'tkpt', 'tthpt','pt', 'ptth', 'pho thong', 'phổ thông', 'ph0 th0ng', 'pk0 tk0nq',
+                        'trung hoc pho thong', 'trung h0.c ph0 th0ng', 'trunq h0c pk0 tk0nq', 
+                        'trung học phổ thông' 'truong trung hoc pho thong', 'trường trung học phổ thông', 'tru0`ng trung h0.c ph0 th0ng',
+                        'tru0nq trunq h0c pk0 tk0nq', 'truog trug hoc pho thog', 'trg thpt', 'trường thpt', 'truog trug hoc fo thog',
+                        'cap 3', 'cấp 3', 'c4p 3', 'pho thong trung hoc', 'ph0 th0ng trung h0c', 'pk0 tk0nq trunq h0c',
+                        'phổ thông trung học', 'fo thog trug hoc','truong pho thong trung hoc', 
+                        'trường phổ thông trung học', 'truog fo thog trug hoc', 'tru0ng ph0 th0ng trung h0c', 'tru0nq pk0 tk0nq trunq h0c'],
                     'high school': ['high school', 'highschool'],
-                    'truong trung hoc pho thong': ['truong trung hoc pho thong', 'thpt', 'pt', 'ptth', 'pho thong', 'trung hoc pho thong', 'truong thpt', 'truong cap 3', 'cap 3', 'pho thong trung hoc'],
-                    'truong thpt': ['truong thpt', 'thpt', 'pt', 'ptth', 'pho thong', 'trung hoc pho thong', 'truong trung hoc pho thong', 'truong cap 3', 'cap 3', 'pho thong trung hoc'],
-                    'trung hoc pho thong': ['trung hoc pho thong', 'thpt', 'pt', 'ptth', 'pho thong', 'truong thpt', 'truong trung hoc pho thong', 'truong cap 3', 'cap 3', 'pho thong trung hoc'],
-                    'tp hcm': ['tp hcm', 'tp.hcm', 'tp. ho chi minh', 'tphcm', 'tp ho chi minh'],
-                    'tp ho chi minh': ['tp ho chi minh', 'tp hcm', 'tp.hcm', 'tp. ho chi minh', 'tphcm'],
-                    'tp. ho chi minh': ['tp. ho chi minh', 'tp hcm', 'tp.hcm', 'tp ho chi minh', 'tphcm'],
-                    'dai hoc': ['dai hoc', 'daj hoc', 'dh', 'truong dai hoc', 'truong dh'],
-                    'truong dai hoc': ['truong dai hoc', 'dai hoc', 'daj hoc', 'dh', 'truong dh'],
-                    'cao dang': ['cao dang', 'cd', 'truong cao dang'],
-                    'truong cao dang': ['truong cao dang', 'cd', 'cao dang'],
-                    'cao dang su pham': ['cao dang su pham', 'cdsp'],
-                    'truong cao dang su pham': ['truong cao dang su pham', 'cao dang su pham', 'cdsp'],
-                    'dan lap': ['dan lap', 'dl'],
-                    'ptdt nt': ['ptdt nt', 'ptdtnt', 'pho thong dan toc noi tru'],
-                    'ptdt bt': ['ptdt bt', 'ptdtbt', 'pho thong dan toc ban tru'],
-                    'gdtx': ['gdtx', 'ttgdtx', 'giao duc thuong xuyen', 'trung tam gdtx', 'trung tam giao duc thuong xuyen'],
-                    'trung tam gdtx': ['trung tam gdtx', 'gdtx', 'ttgdtx', 'giao duc thuong xuyen', 'trung tam giao duc thuong xuyen'],
-                    'trung tam giao duc thuong xuyen': ['trung tam giao duc thuong xuyen', 'trung tam gdtx', 'gdtx', 'ttgdtx', 'giao duc thuong xuyen'],
-                    'giao duc thuong xuyen': ['giao duc thuong xuyen', 'gdtx', 'ttgdtx', 'trung tam gdtx', 'trung tam giao duc thuong xuyen'],
-                    'bach khoa': ['bach khoa', 'bk'],
-                    'dai hoc bach khoa ha noi': ['dai hoc bach khoa ha noi', 'dhbkhn'],
-                    'hoc vien ngan hang': ['hoc vien ngan hang', 'hvnh'],
-                    'giao thong van tai': ['giao thong van tai', 'gtvt'],
-                    'truong dai hoc su pham': ['truong dai hoc su pham', 'dhsp', 'dai hoc su pham'],
-                    'dai hoc su pham': ['dai hoc su pham', 'truong dai hoc su pham', 'dhsp']}
+                    'tp. ho chi minh': ['thành phố hcm', 'hồ chí minh', 'tp hcm', 'tp. hcm', 'hcm' 'tp.hcm', 'tp. ho chi minh', 'tp. hồ chí minh', 'tp. ho chj mjh', "tp. h0` chj' mjnh", 
+                        'tphcm', 'tp ho chi minh', 'tp ho chj mjh', "tp h0` chj' mjnh", 'tp h0 ckj mjnk', 
+                        'tp hồ chí minh', 'thành phố hồ chí minh', 'thah fo ho chj mjh', "th4`nh ph0' h0` chj' mjnh", 'tk4nk pk0 h0 ckj mjnk'],
+                    'tp ho chi minh': ['thành phố hcm', 'hồ chí minh', 'tp hcm', 'tp. hcm', 'hcm' 'tp.hcm', 'tp. ho chi minh', 'tp. hồ chí minh', 'tp. ho chj mjh', "tp. h0` chj' mjnh", 
+                        'tphcm', 'tp ho chi minh', 'tp ho chj mjh', "tp h0` chj' mjnh", 'tp h0 ckj mjnk', 
+                        'tp hồ chí minh', 'thành phố hồ chí minh', 'thah fo ho chj mjh', "th4`nh ph0' h0` chj' mjnh", 'tk4nk pk0 h0 ckj mjnk'],
+                    'tp hcm': ['thành phố hcm', 'hồ chí minh', 'tp hcm', 'tp. hcm', 'hcm' 'tp.hcm', 'tp. ho chi minh', 'tp. hồ chí minh', 'tp. ho chj mjh', "tp. h0` chj' mjnh", 
+                        'tphcm', 'tp ho chi minh', 'tp ho chj mjh', "tp h0` chj' mjnh", 'tp h0 ckj mjnk', 
+                        'tp hồ chí minh', 'thành phố hồ chí minh', 'thah fo ho chj mjh', "th4`nh ph0' h0` chj' mjnh", 'tk4nk pk0 h0 ckj mjnk'],
+                    'hcm': ['thành phố hcm', 'hồ chí minh', 'tp hcm', 'tp. hcm', 'hcm' 'tp.hcm', 'tp. ho chi minh', 'tp. hồ chí minh', 'tp. ho chj mjh', "tp. h0` chj' mjnh", 
+                        'tphcm', 'tp ho chi minh', 'tp ho chj mjh', "tp h0` chj' mjnh", 'tp h0 ckj mjnk', 
+                        'tp hồ chí minh', 'thành phố hồ chí minh', 'thah fo ho chj mjh', "th4`nh ph0' h0` chj' mjnh", 'tk4nk pk0 h0 ckj mjnk'],
+                    'truong dai hoc': ['dai hoc', 'đại học', 'daj hoc', 'dh', 'truong dai hoc', 'trường đại học', 'truong dh', 'truog daj hoc', 
+                        'tru0`ng +)4j h0.c', 'tru0nq d4j h0c', '+)4j h0.c', "đại's học's", 'd4j h0c', 'trg dh', 'truog dh', 'dai hok', 'daj hok'],
+                    'dai hoc': ['dai hoc', 'đại học', 'daj hoc', 'dh', 'truong dai hoc', 'trường đại học', 'truong dh', 'truog daj hoc', 
+                        'tru0`ng +)4j h0.c', 'tru0nq d4j h0c', '+)4j h0.c', "đại's học's", 'd4j h0c', 'trg dh', 'truog dh', 'dai hok', 'daj hok'],
+                    'truong cao dang su pham': ['cao dang su pham', 'cdsp', 'cao dag su fam', 'c40 ])4ng su ph4m', 'c40 d4nq su pk4m', 'cao đẳng sư phạm',
+                        'trường cao đẳng sư phạm', 'truong cao dang su pham', 'trg cdsp', 'truog cdsp', 'truog cao dag su fam', 
+                        'tru0`ng c40 +)4ng su ph4m', 'tru0nq c40 d4nq su pk4m'],
+                    'cao dang su pham': ['cao dang su pham', 'cdsp', 'cao dag su fam', 'c40 ])4ng su ph4m', 'c40 d4nq su pk4m', 'cao đẳng sư phạm',
+                        'trường cao đẳng sư phạm', 'truong cao dang su pham', 'trg cdsp', 'truog cdsp', 'truog cao dag su fam', 
+                        'tru0`ng c40 +)4ng su ph4m', 'tru0nq c40 d4nq su pk4m'],
+                    'truong cao dang': ['cao dang', 'cao đẳng', 'cao dag', 'c40 +)4ng', 'c40 d4nq', 'cd', 'truong cao dang', 'trường cao đẳng', 'truog cao dag', 
+                        'tru0`ng c40 +)4ng', 'tru0nq c40 d4nq'],
+                    'cao dang': ['cao dang', 'cao đẳng', 'cao dag', 'c40 +)4ng', 'c40 d4nq', 'cd', 'truong cao dang', 'trường cao đẳng', 'truog cao dag', 
+                        'tru0`ng c40 +)4ng', 'tru0nq c40 d4nq'],
+                    'hoc vien': ['hoc vien', 'học viện', 'hoc vjen', 'h0.c vjện', 'h0c vj3n'],
+                    'dan lap': ['dan lap', 'dân lập' 'dl', 'd4n l4p'],
+                    'ptdt': ['ptdt nt', 'ptdtnt', 'pho thong dan toc noi tru', 'phổ thông dân tộc nội trú', 'ptdt noj tru' ,'fo thog dan toc noj tru',
+                        'pk0 tk0nq d4n t0c n0j tru'],
+                    'trung tam giao duc thuong xuyen': ['gdtx', 'ttgdtx', 'tt gdtx', 'ttgdnn gdtx' 'giao duc thuong xuyen', 'giáo dục thường xuyên', 'jao duc thuog xyen',
+                        'trung tam gdtx', 'trung tâm gdtx', 'qj40 duc tku0nq xuy3n', 'trug tam jao duc thuog xyen', "trung t4m gj4'0 ])u.c thu0`ng xuij3n",
+                        'trung tam giao duc thuong xuyen', 'trung tâm giáo dục thường xuyên', 'trunq t4m qj40 duc tku0nq xuy3n', 'trung tam gdnn gdtx',
+                        'gdnn gdtx', 'trug tam gdtx', 'trunq t4m gdtx', 'trunq t4m gdnn gdtx', 'trunq t4m gdnn gdtx'],
+                    'giao duc thuong xuyen': ['gdtx', 'ttgdtx', 'tt gdtx', 'ttgdnn gdtx' 'giao duc thuong xuyen', 'giáo dục thường xuyên', 'jao duc thuog xyen',
+                        'trung tam gdtx', 'trung tâm gdtx', 'qj40 duc tku0nq xuy3n', 'trug tam jao duc thuog xyen', "trung t4m gj4'0 ])u.c thu0`ng xuij3n",
+                        'trung tam giao duc thuong xuyen', 'trung tâm giáo dục thường xuyên', 'trunq t4m qj40 duc tku0nq xuy3n', 'trung tam gdnn gdtx',
+                        'gdnn gdtx', 'trug tam gdtx', 'trunq t4m gdtx', 'trunq t4m gdnn gdtx', 'trunq t4m gdnn gdtx'],
+                    'trung tam gdtx': ['gdtx', 'ttgdtx', 'tt gdtx', 'ttgdnn gdtx' 'giao duc thuong xuyen', 'giáo dục thường xuyên', 'jao duc thuog xyen',
+                        'trung tam gdtx', 'trung tâm gdtx', 'qj40 duc tku0nq xuy3n', 'trug tam jao duc thuog xyen', "trung t4m gj4'0 ])u.c thu0`ng xuij3n",
+                        'trung tam giao duc thuong xuyen', 'trung tâm giáo dục thường xuyên', 'trunq t4m qj40 duc tku0nq xuy3n', 'trung tam gdnn gdtx',
+                        'gdnn gdtx', 'trug tam gdtx', 'trunq t4m gdtx', 'trunq t4m gdnn gdtx', 'trunq t4m gdnn gdtx'],
+                    'gdtx': ['gdtx', 'ttgdtx', 'tt gdtx', 'ttgdnn gdtx' 'giao duc thuong xuyen', 'giáo dục thường xuyên', 'jao duc thuog xyen',
+                        'trung tam gdtx', 'trung tâm gdtx', 'qj40 duc tku0nq xuy3n', 'trug tam jao duc thuog xyen', "trung t4m gj4'0 ])u.c thu0`ng xuij3n",
+                        'trung tam giao duc thuong xuyen', 'trung tâm giáo dục thường xuyên', 'trunq t4m qj40 duc tku0nq xuy3n', 'trung tam gdnn gdtx',
+                        'gdnn gdtx', 'trug tam gdtx', 'trunq t4m gdtx', 'trunq t4m gdnn gdtx', 'trunq t4m gdnn gdtx'],
+                    'dai hoc bach khoa ha noi': ['dai hoc bach khoa ha noi', 'đại học bách khoa hà nội', 'dhbkhn', 'dh bkhn', 
+                        'daj hoc bax koa ha noj', "+)4j h0.c |34'ch kh04 h4` n0.j", "đại's học's bách's khoa's hà's nội's",
+                        'd4j h0c b4ck kh04 h4 n0j', 'dh bach khoa hn', 'dh bach khoa ha noi', 'dhbk ha noi', 'dhbk hn', 'bkhn',
+                        'bk ha noi'],
+                    'dh bach khoa ha noi': ['dai hoc bach khoa ha noi', 'đại học bách khoa hà nội', 'dhbkhn', 'dh bkhn', 
+                        'daj hoc bax koa ha noj', "+)4j h0.c |34'ch kh04 h4` n0.j", "đại's học's bách's khoa's hà's nội's",
+                        'd4j h0c b4ck kh04 h4 n0j', 'dh bach khoa hn', 'dh bach khoa ha noi', 'dhbk ha noi', 'dhbk hn', 'bkhn',
+                        'bk ha noi'],
+                    'bach khoa': ['bach khoa', 'bk', 'bách khoa', "bách's khoa's", 'b4ck kh04', 'back khoa'],
+                    'hoc vien ngan hang': ['hoc vien ngan hang', 'học viện ngân hàng', 'hvnh'],
+                    'giao thong van tai': ['giao thong van tai', 'giao thông vận tải', 'gtvt', 'jao thog van taj', 'gj40 th0ng v4n t4j',
+                        'qj40 tk0nq v4n t4j', 'giao thong vt'],
+                    'truong dai hoc su pham': ['truong dai hoc su pham', 'trường đại học sư phạm', 'dhsp', 'dai hoc su pham',
+                        'daj hoc su pham', 'truog daj hoc su fam', 'tru0`ng +)4j h0.c su ph4m', 'tru0nq d4j h0c su pk4m',
+                        'trg dhsp'],
+                    'dai hoc su pham': ['truong dai hoc su pham', 'trường đại học sư phạm', 'dhsp', 'dai hoc su pham',
+                        'daj hoc su pham', 'truog daj hoc su fam', 'tru0`ng +)4j h0.c su ph4m', 'tru0nq d4j h0c su pk4m',
+                        'trg dhsp']}
 
     for _ in range(num_iters):
         for k in augmentation.keys():
@@ -85,23 +151,26 @@ if __name__ == '__main__':
     path = 'D:\Projects\VND_work\classification_fb_education\data_for_augmentation\education_train.csv'
 
     df = pd.read_csv(path)
+    df['lower_text'] = df['text'].apply(lambda x: x.lower())
+    df['lower_normed_text'] = df['normed_text'].apply(lambda x: x.lower())
+    
     df = df.dropna()
     df = df.reset_index(drop=True)
 
-    df2 = pd.DataFrame(df['normed_text'].unique(), columns=['normed_text_unique'])
+    df2 = pd.DataFrame(df['lower_text'].unique(), columns=['lower_text_unique'])
 
 
     for i in tqdm(range(len(df2)), desc="Augmentation"):
-        text = df2['normed_text_unique'][i]
+        text = df2['lower_text_unique'][i]
         generate_augmentation(text, num_iters=1000) # 'results' is changed
 
-    df2['augmented_name'] = df2['normed_text_unique'].apply(lambda x: results[x])
-    df2['count'] = df2['normed_text_unique'].apply(lambda x: len(results[x]))
+    df2['augmented_name'] = df2['lower_text_unique'].apply(lambda x: results[x])
+    df2['count'] = df2['lower_text_unique'].apply(lambda x: len(results[x]))
 
     # Adding original data to fake data
     for i in tqdm(range(len(df2)), desc="Adding Original to Fake"):
-        content = df2.loc[i, 'normed_text_unique']
-        original_list = df.loc[df['normed_text']==content, :]['text'].to_list()
+        content = df2.loc[i, 'lower_text_unique']
+        original_list = df.loc[df['lower_text']==content, :]['lower_text'].to_list()
         df2.loc[i, 'augmented_name'].extend(original_list)
         df2.loc[i, 'count'] += len(original_list)
     
