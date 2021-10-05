@@ -1,17 +1,20 @@
 # Augmenting education data
-This is a tool to create fake education data for VND company
+A tool used to create fake education data for the normalizing education problem
+
 ## Requirements
 1. unidecode
 2. random
 3. re
 4. pandas
 5. tqdm
+6. numpy
 
 ## Version
 Python 3.9.6
 
 ## Environment
-Anaconda, Windows 10
+- Anaconda, Windows 10
+- Anaconda, Ubuntu 18.04
 
 ## Run
-`python augment_education.py`
+Open a terminal, run `python augment_education.py`
