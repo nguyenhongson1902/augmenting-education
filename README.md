@@ -1,5 +1,5 @@
 # Augmenting education data
-A tool used to create fake education data for the normalizing education problem
+A tool used to create fake education data for normalizing education problem
 
 ## Requirements
 1. unidecode
