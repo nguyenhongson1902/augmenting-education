@@ -5,6 +5,8 @@ import pandas as pd
 from tqdm import tqdm # to know how much time to finish
 import itertools # use to flatten a list of lists
 import os # to join path
+import numpy as np
+tqdm.pandas()
 
 
 results = dict() # storage
@@ -30,6 +32,19 @@ def remove_accent(text):
     '''
     res = unidecode.unidecode(text)
     return string_punctuation(res)
+
+def remove_accent_randomly(text):
+    '''
+        Randomly remove a few words in a sentence
+        Input:
+            text: A string
+        Output:
+            A sentence with a few words having accents removed
+    '''
+    text_list = np.array(text.split())
+    indices = np.random.choice(len(text_list), size=round(0.3*(len(text_list))), replace=False)
+    text_list[indices] = [remove_accent(s) for s in text_list[indices]]
+    return ' '.join(text_list)
 
 def generate_augmentation(s, num_iters=1000):
     '''
@@ -190,31 +205,29 @@ def augmented_1(x):
     x = x.lower()
     if re.match('^đh', x) or re.match('^cđ', x) or re.match('^hv', x):
         for i in random.choices(tmp1, k=round(0.7*len(tmp1))):
-            if i == 'confession ':
-                result.append(x + ' ' + 'confession')
-            elif i == 'confession trường ':
-                result.append(x + ' ' + 'confession')
-            result.append(i + x)
+            if i == 'confession ' or i == 'confession trường ':
+                result.append(remove_accent_randomly(text=x + ' ' + 'confession'))
+            result.append(remove_accent_randomly(text=i + x))
         for i in random.choices(tmp2, k=round(0.7*len(tmp2))):
-            result.append('khoa ' + i + x)
+            result.append(remove_accent_randomly(text='khoa ' + i + x))
         for i in random.choices(tmp3, k=round(0.7*len(tmp3))):
-            result.append('viện ' + i + x)
-            result.append('vjen ' + i + x)
+            result.append(remove_accent_randomly(text='viện ' + i + x))
+            result.append(remove_accent_randomly(text='vjen ' + i + x))
         
         for i in random.choices(tmp4, k=round(0.7*len(tmp4))):
-            result.append('câu lạc bộ ' + i + x)
-            result.append('clb ' + i + x)
+            result.append(remove_accent_randomly(text='câu lạc bộ ' + i + x))
+            result.append(remove_accent_randomly(text='clb ' + i + x))
     elif ('thpt' in x) and (('chuyên' in x) or ('năng khiếu' in x)) :
         for i in random.choices(tmp5, k=round(0.7*len(tmp5))):
-            result.append(i + x)
+            result.append(remove_accent_randomly(text=i + x))
     elif re.match('^thpt', x) or re.match('^thcs-thpt', x):
         for i in random.choices(tmp6, k=round(0.7*len(tmp6))):
             if i == 'confession ':
-                result.append(x + ' ' + 'confession')
-            result.append(' '.join(x.split()[1:]) + ' highschool')
-            result.append(' '.join(x.split()[1:]) + ' high school')
-            result.append(' '.join(x.split()[1:]) + ' 2school')
-            result.append(i + x)
+                result.append(remove_accent_randomly(text=x + ' ' + 'confession'))
+            remove_accent_randomly(text=' '.join(x.split()[1:]) + ' high school')
+            result.append(remove_accent_randomly(text=' '.join(x.split()[1:]) + ' highschool'))
+            result.append(remove_accent_randomly(text=' '.join(x.split()[1:]) + ' high school'))
+            result.append(remove_accent_randomly(text=i + x))
     
     return result
 
@@ -244,9 +257,10 @@ def randomly_select(x, m, n):
 
 
 if __name__ == '__main__':
-    train_path = '/home/sonnh/son/VND/augmenting-education/data_for_augmentation' # path to training data, contains `text`, `normed_text`, `lower_text`, `lower_normed_text` columns
-    df = pd.read_csv(os.path.join(train_path, 'final_train.csv'))
+    train_path = '/home/sonnh/son/VND/augmenting-education/data_for_augmentation' # path to training data, contains `text`, `normed_text` columns
+    df = pd.read_csv(os.path.join(train_path, 'final_train_old.csv'))
     
+    df['lower_text'] = df['text'].apply(lambda x: x.lower())
 
     # Add lower_text to tmp_dict
     tmp_dict = dict()
@@ -255,7 +269,7 @@ if __name__ == '__main__':
 
     df2 = pd.DataFrame(df['normed_text'].unique(), columns=['unique_name']) # contains unique names of column `normed_text` in df
     
-    df2['augmented_1'] = df2['unique_name'].apply(lambda x: augmented_1(x)) # Them khoa, vien, lop, ... trong cot `augmented_1`
+    df2['augmented_1'] = df2['unique_name'].progress_apply(lambda x: augmented_1(x)) # Them khoa, vien, lop, ... trong cot `augmented_1`
 
     for i in tqdm(range(len(df2)), desc="Augmentation"):
         text = df2.loc[i, 'unique_name']
@@ -285,7 +299,7 @@ if __name__ == '__main__':
 
     # Saving augmented results
     augmented_path = './data_augmented'
-    df3.to_csv(os.path.join(augmented_path, 'final_train_augmented.csv'), index=False)
+    df3.to_csv(os.path.join(augmented_path, 'final_train_old_augmented.csv'), index=False)
 
 
     
